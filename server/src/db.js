@@ -8,8 +8,7 @@ const connection = mySql.createPool({
   user: `${process.env.NAME}`,
   password: `${process.env.PASSWORD}`,
   database: `${process.env.DATABASE}`,
-  connectTimeout: 60000,
-  acquireTimeout: 60000
+  
 });
 
 
@@ -20,7 +19,7 @@ class DbService {
   async getData() {
     try {
       const response = await new Promise((resolve, reject) => {
-        const query = `SELECT * FROM ${process.env.TABLE_NAME1} WHERE Status = 1`;
+        const query = `SELECT * FROM billboardinfo WHERE Status = 1`;
         
         connection.query(query, (err, result) => {
           console.log("database connected succesfully");
@@ -37,7 +36,7 @@ class DbService {
     try {
       const InsertId = await new Promise((resolve, reject) => {
         const query =
-          "INSERT INTO "+process.env.TABLE_NAME2+" (Name,date,route,marker_type,distance) VALUES (?,?,?,?,?);";
+          "INSERT INTO markerdistancedata (Name,date,route,marker_type,distance) VALUES (?,?,?,?,?);";
         connection.query(
           query,
           [Name, date, route, marker_type, distance],
