@@ -1,3 +1,6 @@
+
+
+
 // 1.data in json format
 var URL = "http://localhost:8080/"
 
@@ -92,7 +95,9 @@ function initMap(data) {
       var longitude = ParseDMS(loc.Longitude);
       var latitude = ParseDMS(loc.Latitude);
       var MarkerType = loc.Marker_Type;
+      
       var id = loc.Marker_ID;
+      console.log(id);
       // adding markers on the map
       addMarker(latitude, longitude, MarkerType, id);
     });
@@ -103,13 +108,13 @@ function initMap(data) {
   function addMarker(latitude, longitude, MarkerType, id) {
     let marker = new google.maps.Marker({
       position: { lng: longitude, lat: latitude },
-      label: MarkerType,
+      label: id,
       id: id,
       map: map,
       title: "ID = " + id + "  " + MarkerType + "  zone 1",
       icon: {
         path: google.maps.SymbolPath.Marker,
-        url: MarkerType == "A" ? red : MarkerType == "B" ? green : yellow,
+        url: MarkerType == "Type A" ? red : MarkerType == "Type B" ? green : yellow,
         fillOpacity: 1,
         strokeColor: "white",
         strokeWeight: 10,
